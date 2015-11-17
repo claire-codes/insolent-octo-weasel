@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SVG Playground</title>
+</head>
+
+<body>
+
+<script>
+  // User input
+  var equation = "floop = x + y";
+  var fontSize = 40;
+
+  var baseX = 0;
+  var baseY = fontSize;
+  var xmlns = "http://www.w3.org/2000/svg";
+
+  var gvs = document.createElementNS(xmlns, "svg");
+  gvs.setAttributeNS(null,"id","gvs");
+  gvs.setAttributeNS(null,"height","500px");
+  gvs.setAttributeNS(null,"style","border:1px solid black");
+  document.body.appendChild(gvs);
+
+  var formula = document.createElementNS(xmlns, "text");
+  formula.setAttributeNS(null,"id","formula");
+  formula.setAttributeNS(null,"x",baseX);
+  formula.setAttributeNS(null,"y",baseY);
+  formula.setAttributeNS(null,"font-family","Courier New");
+  formula.setAttributeNS(null,"font-size",fontSize + "px");
+  formula.textContent = equation;
+  document.getElementById('gvs').appendChild(formula);
+
+  var x2 = document.getElementById('formula').getBBox().width + baseX;
+
+  var line = document.createElementNS(xmlns, "line");
+  line.setAttributeNS(null,"x1",baseX);
+  line.setAttributeNS(null,"y1",fontSize * 2);
+  line.setAttributeNS(null,"x2",x2);
+  line.setAttributeNS(null,"y2",fontSize * 2);
+  line.setAttributeNS(null,"stroke","#006600");
+  document.getElementById('gvs').appendChild(line);
+
+
+  var middle = (document.getElementById('formula').getBBox().width/2) + baseX;
+  var axis = document.createElementNS(xmlns, "line");
+  axis.setAttributeNS(null,"x1",middle);
+  axis.setAttributeNS(null,"y1",0);
+  axis.setAttributeNS(null,"x2",middle);
+  axis.setAttributeNS(null,"y2",140);
+  axis.setAttributeNS(null,"stroke","#006600");
+  document.getElementById('gvs').appendChild(axis);
+
+  var numb = document.createElementNS(xmlns, "text");
+  numb.textContent = '(1)';
+  numb.setAttributeNS(null,"x",middle);
+  numb.setAttributeNS(null,"y",fontSize * 3);
+  numb.setAttributeNS(null,"text-anchor",'middle');
+  numb.setAttributeNS(null,"font-size",fontSize + "px");
+  numb.setAttributeNS(null,"font-family","Courier New");
+  document.getElementById('gvs').appendChild(numb);
+
+  gvs.setAttributeNS(null,"width",x2+"px");
+
+  //TODO: work out minimum height
+
+</script>
+
+</body>
+</head>
